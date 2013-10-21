@@ -100,14 +100,9 @@
 		var overlay = document.createElement('div');
 		overlay.className = 'md-overlay';
 
-		var This = this;
+		overlay._t = this;
 		overlay.addEventListener('click', function(){
-			This.hide(function(){
-				//300 plus 1 ms of the css until deletion
-				setTimeout(function(){
-					This.remove();
-				}, 301);
-			});
+			this._t.vaporize();
 		});
 
 		//Before appending, removes if existing
@@ -150,6 +145,19 @@
 	 */
 	Modal.prototype.hide = function(){
 		classie.toggle(this.modal, 'md-show');
+	};
+
+	/**
+	 * Hides and remove the DOM
+	 */
+	Modal.prototype.vaporize = function() {
+		var t = this;
+		this.hide(function(){
+			//300 plus 1 ms of the css until deletion
+			setTimeout(function(){
+				t.remove();
+			}, 301);
+		});
 	};
 
 	window.Modal = function(j){
