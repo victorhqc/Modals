@@ -1,0 +1,15 @@
+{
+	"name": "modals",
+	"version": "",
+	"main": [
+		"modals.class.js",
+		"modals.class.css"
+	],
+	"ignore": [
+	],
+	"keywords": [
+		"javascript",
+		"css",
+		"modals"
+	]
+}
