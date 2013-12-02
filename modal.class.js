@@ -25,8 +25,18 @@
 			message: 'Lorem ipsum ad his scripta blandit partiendo, eum fastidii accumsan euripidis in, eum liber hendrerit an. Qui ut wisi vocibus suscipiantur, quo dicit ridens inciderint id. Quo mundi lobortis reformidans eu, legimus senserit definiebas an eos. Eu sit tincidunt incorrupte definitionem, vis mutat affert percipit cu, eirmod consectetuer signiferumque eu per. In usu latine equidem dolores.',
 			subtitle: 'Sub title',
 			actions: {
-				accept: function(){},
-				cancel: function(){}
+				accept: {
+					text: 'Accept',
+					icon: 'glyphicon glyphicon-ok',
+					clas: 'btn btn-success',
+					action: {}
+				},
+				cancel: {
+					text: 'Cancel',
+					icon: 'glyphicon glyphicon-cancel',
+					clas: 'btn btn-danger',
+					action: {}
+				}
 			},
 			createHelper: function(){},
 			container:'body',
@@ -116,6 +126,33 @@
 		container.appendChild(overlay);
 
 		this.createHelper(this);
+		this.actions_creator();
+	};
+
+	Modal.prototype.actions_creator = function() {
+		for(var k in this.actions){
+			if(this.actions.hasOwnProperty(k) &&typeof this.actions[k].action === 'function'){
+				var btn = document.createElement('button');
+				btn.className = this.actions[k].clas;
+
+				var span = document.createElement('span');
+				var text = document.createTextNode(this.actions[k].text);
+				span.appendChild(text);
+				btn.appendChild(span);
+
+				var icon = document.createElement('i');
+				icon.className = this.actions[k].icon;
+				btn.appendChild(icon);
+
+				this.footer.appendChild(btn);
+				btn._t = this;
+				btn._action = this.actions[k].action;
+				btn.addEventListener('click', function(){
+					this._action(this._t);
+				}, false);
+				
+			}
+		}
 	};
 
 	/**
