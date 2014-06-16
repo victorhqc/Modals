@@ -81,7 +81,7 @@
 
 		if(this.subtitle != ''){
 			//For subtitles
-			
+
 			var br = document.createElement('br');
 			title.appendChild(br);
 
@@ -96,11 +96,11 @@
 
 		header.appendChild(title);
 		content.appendChild(header);
-		
+
 		body.appendChild(message);
 		content.appendChild(body);
 
-		
+
 		content.appendChild(footer)
 
 		main.appendChild(content);
@@ -148,9 +148,9 @@
 				btn._t = this;
 				btn._action = this.actions[k].action;
 				btn.addEventListener('click', function(){
-					this._action(this._t);
+					this._action(this._t, this);
 				}, false);
-				
+
 			}
 		}
 	};
